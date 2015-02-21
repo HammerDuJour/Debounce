@@ -2,6 +2,7 @@ import datetime
 import RPi.GPIO as GPIO
 import time
 
+from textme import *
 
 #initialize variables
 diff = 0; # set for two hours
