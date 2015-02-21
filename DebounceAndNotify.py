@@ -5,7 +5,7 @@ import time
 from textme import *
 
 #initialize variables
-diff = 0; # set for two hours
+diff = 2*60*60; # set for two hours
 trigger = false;  
 
 #Rasperry Pi GPIO Setup
@@ -23,6 +23,7 @@ while True:
   if (input && trigger):
     now = datetime.now();
     if (now - triggerTime > diff):
+      print("Send Email")
       #SendEmail()
       
   if (!input):
