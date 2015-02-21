@@ -28,4 +28,6 @@ while True:
       
   if (!input):
     trigger = false;
+    
+sleep(60);
   
