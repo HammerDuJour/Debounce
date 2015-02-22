@@ -1,18 +1,20 @@
+#!/usr/bin/python
+
 import datetime
 import RPi.GPIO as GPIO
 import time
 
-from textme import *
+#from textme import *
 
 #initialize variables
-debug = true;
-diff = 2*60*60; # set for two hours
+debug = True;
+diff = datetime.timedelta(hours=2); # set for two hours
 interval = 60; 
 if (debug):
-  diff = 2*60;
+  diff = datetime.timedelta(minutes=2);
   interval = 1;
 
-trigger = false;  
+trigger = False;  
 
 
 #Rasperry Pi GPIO Setup
@@ -25,22 +27,22 @@ while True:
   print("Get Input")
   print(input)
   
-  if (input && !trigger):  # set initial values. Our state has changed and we want to start counting time
+  if (input and not(trigger)):  # set initial values. Our state has changed and we want to start counting time
     print("Input High First Time, Set Time")
-    trigger = true;
-    triggerTime = datetime.now()
+    trigger = True;
+    triggerTime = datetime.datetime.now()
   
-  if (input && trigger):
+  if (input and trigger):
     print("Trigger Still High, Check Time")
-    now = datetime.now();
+    now = datetime.datetime.now();
     if (now - triggerTime > diff):
       print("Send Email")
       #SendEmail()
+      trigger = False
       
-  if (!input):
+  if (not(input)):
     print("Trigger Low, Reset")
-    trigger = false;
+    trigger = False;
     
-sleep(interval);
-print("Sleep")
-  
+  print("Sleep")
+  time.sleep(interval)
